@@ -1,7 +1,6 @@
 import os
 from anthropic import AnthropicFoundry
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-from Dtos import requestDto, responseDto
 from dotenv import load_dotenv
 
 def configureAISession() -> AnthropicFoundry:

@@ -1,17 +1,18 @@
 import os
-from Dtos import responseDto,requestDto
+from Dtos.responseDto import responseDto
+from Dtos.requestDto import requestDto
 from anthropic import AnthropicFoundry
 from dotenv import load_dotenv
 
 load_dotenv()
 deployment_name = os.getenv("DEPLOYMENT_NAME")
 
-def getAIResponse(prompt: requestDto, client: AnthropicFoundry) -> responseDto:
+def getAIResponse(req: requestDto, client: AnthropicFoundry) -> responseDto:
     
     message = client.messages.create(
         model=deployment_name,
         messages=[
-            {"role": "user", "content": prompt}
+            {"role": "user", "content": req.prompt}
         ],
         max_tokens=1024,
     )

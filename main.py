@@ -1,31 +1,11 @@
-import uvicorn
-# import os
 from fastapi import FastAPI
-# from anthropic import AnthropicFoundry
-# from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-
-# endpoint = "https://thenul-azureai-test1-resource.services.ai.azure.com/anthropic"
-# deployment_name = "claude-opus-4-8"
-# token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
-
-# client = AnthropicFoundry(
-#     azure_ad_token_provider=token_provider,
-#     base_url=endpoint
-# )
-# prompt = input("Enter your prompt: ")
-# message = client.messages.create(
-#     model=deployment_name,
-#     messages=[
-#         {"role": "user", "content": prompt}
-#     ],
-#     max_tokens=1024,
-# )
-
-# print(message.content[0].text)
-
+from Services import ClaudeService, ChatService
+from anthropic import AnthropicFoundry
+from Dtos import requestDto,responseDto
 
 app = FastAPI()
 
+client = ClaudeService.configureAISession()
 
 items = []
 
@@ -38,3 +18,8 @@ def read_root():
 def read_item(q: str):
     items.append(q)
     return items
+
+@app.post("/chat", response_model=responseDto.responseDto)
+def chat(req: requestDto.requestDto):
+    return ChatService.getAIResponse(req, client)
+
