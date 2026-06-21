@@ -14,4 +14,4 @@ run command-> "source venv/bin/activate"
 
 STEP 3:
 
-run command-> "python chat-app.py"
+run command-> "python main.py"
