@@ -1,20 +1,21 @@
 import os
+import openai
 from Dtos.responseDto import responseDto
 from Dtos.requestDto import requestDto
-from anthropic import AnthropicFoundry
 from dotenv import load_dotenv
+from azure.identity import DefaultAzureCredential
+from azure.ai.projects import AIProjectClient
 
 load_dotenv()
-deployment_name = os.getenv("DEPLOYMENT_NAME")
+agent = os.getenv("MY_AGENT")
+version = os.getenv("MY_VERSION")
 
-def getAIResponse(req: requestDto, client: AnthropicFoundry) -> responseDto:
+def getAIResponse(req: requestDto, client: openai.OpenAI) -> responseDto:
     
-    message = client.messages.create(
-        model=deployment_name,
-        messages=[
-            {"role": "user", "content": req.prompt}
-        ],
-        max_tokens=1024,
+
+    response = client.responses.create(
+        input=[{"role": "user", "content": req.prompt}],
+        extra_body={"agent_reference": {"name": agent, "version": version, "type": "agent_reference"}},
     )
 
-    return responseDto(response=message.content[0].text)
+    return responseDto(response=response.output_text)

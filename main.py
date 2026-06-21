@@ -2,6 +2,9 @@ from fastapi import FastAPI
 from Services import ClaudeService, ChatService
 from anthropic import AnthropicFoundry
 from Dtos import requestDto,responseDto
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
