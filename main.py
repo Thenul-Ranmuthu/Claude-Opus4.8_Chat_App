@@ -1,10 +1,10 @@
-from anthropic import AnthropicFoundry
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+# from anthropic import AnthropicFoundry
+# from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from fastapi import FastAPI
 
-endpoint = "https://thenul-azureai-test1-resource.services.ai.azure.com/anthropic"
-deployment_name = "claude-opus-4-8"
-token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
+# endpoint = "https://thenul-azureai-test1-resource.services.ai.azure.com/anthropic"
+# deployment_name = "claude-opus-4-8"
+# token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
 
 # client = AnthropicFoundry(
 #     azure_ad_token_provider=token_provider,
@@ -27,7 +27,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Hello": "Thenul"}
 
 
 @app.get("/items/{item_id}")
