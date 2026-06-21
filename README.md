@@ -19,3 +19,8 @@ run command-> "pip install -r requirements.txt"
 STEP 4:
 
 run command-> "python main.py"
+
+
+Dev:
+
+run commanf "pip freeze > requirements.txt" update the dependency file while developing.
