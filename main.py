@@ -1,6 +1,8 @@
+import uvicorn
+# import os
+from fastapi import FastAPI
 # from anthropic import AnthropicFoundry
 # from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-from fastapi import FastAPI
 
 # endpoint = "https://thenul-azureai-test1-resource.services.ai.azure.com/anthropic"
 # deployment_name = "claude-opus-4-8"
@@ -25,11 +27,14 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
+items = []
+
 @app.get("/")
 def read_root():
     return {"Hello": "Thenul"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str | None = None):
-    return {"item_id": item_id, "q": q}
+@app.post("/items")
+def read_item(q: str):
+    items.append(q)
+    return items
