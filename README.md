@@ -18,7 +18,7 @@ run command-> "pip install -r requirements.txt"
 
 STEP 4:
 
-run command-> "python main.py"
+run command-> "uvicorn main:app --port 8050"
 
 
 Dev:
