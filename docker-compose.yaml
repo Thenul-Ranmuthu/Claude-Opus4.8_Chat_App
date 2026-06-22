@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  chat-app:
+    image: claude-opus4.8-chat-app:latest
+    container_name: claude-chat-app
+    ports:
+      - "8050:8050"
+    environment:
+      - ENDPOINT=https://thenul-azureai-test1-resource.services.ai.azure.com/api/projects/thenul-azureai-test1
+      - MY_AGENT=Chat-Agent
+      - MY_VERSION=2
+    volumes:
+      - ~/.azure:/root/.azure
+    restart: unless-stopped
